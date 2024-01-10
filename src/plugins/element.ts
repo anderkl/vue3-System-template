@@ -1,3 +1,4 @@
+import { createApp } from 'vue'
 import {
   ElButton,
   ElSelect,
@@ -22,7 +23,7 @@ import {
 } from 'element-plus'
 import 'element-plus/dist/index.css'
 import ElementPlus from 'element-plus'
-export default function loadComponent(app: any) {
+export default function loadComponent(app: ReturnType<typeof createApp>) {
   app.use(ElementPlus, { size: 'small', zIndex: 3000 })
   app.use(ElButton)
   app.use(ElSelect)
