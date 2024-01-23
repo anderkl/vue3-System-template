@@ -21,7 +21,6 @@ import {
   ElMenuItem,
   ElSubMenu
 } from 'element-plus'
-import 'element-plus/dist/index.css'
 import ElementPlus from 'element-plus'
 export default function loadComponent(app: ReturnType<typeof createApp>) {
   app.use(ElementPlus, { size: 'small', zIndex: 3000 })
