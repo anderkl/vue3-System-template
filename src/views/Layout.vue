@@ -1,5 +1,5 @@
 <template>
-  <div class="">aboutView</div>
+  <div class=""></div>
 </template>
 
 <script lang="ts" setup>

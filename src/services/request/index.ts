@@ -3,8 +3,9 @@ import type { AxiosInstance } from 'axios'
 import type { MyRequestInterceptors, MyRequestConfig } from './type'
 
 import { ElLoading } from 'element-plus'
+import 'element-plus/es/components/loading/style/css'
 import { LoadingInstance } from 'element-plus/lib/components/loading/src/loading'
-const DEAFULT_LOADING = true
+const DEAFULT_LOADING = false
 class MyRequest {
   instance: AxiosInstance
   interceptors?: MyRequestInterceptors
@@ -33,8 +34,6 @@ class MyRequest {
     // 2.添加所有的实例都有的拦截器
     this.instance.interceptors.request.use(
       (config) => {
-        console.log('所有的实例都有的拦截器: 请求成功拦截')
-
         if (this.showLoading) {
           this.loading = ElLoading.service({
             lock: true,
@@ -45,27 +44,25 @@ class MyRequest {
         return config
       },
       (err) => {
-        console.log('所有的实例都有的拦截器: 请求失败拦截')
         return err
       }
     )
 
     this.instance.interceptors.response.use(
       (res) => {
-        console.log('所有的实例都有的拦截器: 响应成功拦截')
-
         // 将loading移除
         this.loading?.close()
-
+        // setTimeout(() => {
+        //   this.loading?.close()
+        // }, 3000)
         const data = res.data
         if (data.returnCode === '-1001') {
           console.log('请求失败~, 错误信息')
         } else {
-          return data
+          return res.data
         }
       },
       (err) => {
-        console.log('所有的实例都有的拦截器: 响应失败拦截')
         // 将loading移除
         this.loading?.close()
 
@@ -87,9 +84,7 @@ class MyRequest {
       }
 
       // 2.判断是否需要显示loading
-      if (config.showLoading === false) {
-        this.showLoading = config.showLoading
-      }
+      this.showLoading = config.showLoading ?? DEAFULT_LOADING
 
       this.instance
         .request<any, T>(config)

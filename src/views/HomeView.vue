@@ -1,21 +1,19 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
-  </div>
+  <div class="">homeView</div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-import HelloWorld from '@/components/HelloWorld.vue' // @ is an alias to /src
+<script lang="ts" setup>
+import { ref, reactive, onBeforeMount, onMounted } from 'vue'
+console.log(ref, reactive)
+//组件挂载到节点上之前执行的函数
+onBeforeMount(() => {
+  console.log('组件挂载到节点上之前执行的函数')
+})
 
-export default defineComponent({
-  name: 'HomeView',
-  components: {
-    HelloWorld
-  },
-  setup() {
-    console.log(123)
-  }
+//组件挂载完成后执行的函数
+onMounted(() => {
+  console.log('组件挂载完成后执行的函数')
 })
 </script>
+
+<style lang="less" scoped></style>
